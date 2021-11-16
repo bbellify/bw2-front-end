@@ -1,0 +1,98 @@
+form {
+  text-align: center;
+}
+
+.form-container {
+  max-width: 400px;
+  min-height: 50vh;
+  margin: 10px auto;
+  padding: 10px;
+  align-items: center;
+} 
+
+button {
+  padding: 10px 20px;
+  width: 100%;
+  border-radius: 5px;
+  margin: 5px 0 auto;
+  background-color: whitesmoke;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  font-color: black;
+  font-style: 14px;
+}
+
+input.error, textarea.error {
+  border: 3px solid crimson;
+}
+
+input:focus, textarea:focus {
+  border-color: black;
+  box-shadow: 0 0 0 2px black;
+  outline: 3px solid transparent;
+}
+
+input:not(textarea) {
+  line-height: 1;
+  height: 2 rem;
+}
+
+input + label {
+  margin-top: 2rem;
+}
+
+button:hover{
+  text-align: center;
+  text-transform: inherit;
+  font-weight: bold;
+}
+
+a.forgotpw {
+  text-decoration: none;
+  color: mediumblue;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+a.forgotpw:hover {
+  text-decoration: bisque;
+  font-weight: bold;
+}
+.errors {
+  color: crimson;
+  @include font-size($sub-font-sizes);
+  margin: 3px 0;
+}
+a.NewUser {
+  text-decoration: none;
+  color: mediumblue;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-decoration: underline;
+}
+a.NewUser:hover {
+  text-decoration: beige;
+  font-weight: bold;
+}
+
+
+input,
+textarea {
+  width: 100%;
+  font-size: 14px;
+  padding: 10px;
+  background-color: whitesmoke;
+  border: 3px solid black;
+  border-radius: 4px;
+  transition: 90ms box-shadow ease-in-out;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+label {
+  font-size: 14px;
+  font-style: inherit;
+  color: black;
+  font-weight: bold;
+}
