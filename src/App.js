@@ -16,13 +16,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Water My Plants and Stuff</h1>
+        <h1>Water My Plants</h1>
         <nav>
           <Link to="/login">Log In </Link>
           <Link to="/logout">Log Out </Link>
           <Link to="/plants">My Plants </Link>
-          <Link to="/newuser">Create Account</Link>
-          <Link to="/edituser">My Account </Link>
+          <Link to="/newUser">Create Account</Link>
+          <Link to="/editUser">My Account </Link>
         </nav>
       </header>
       <Routes>
