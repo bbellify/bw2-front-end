@@ -10,7 +10,7 @@ export default function FormBuilder(props) {
 
   const { fields, init, validationSchema, getFormState } = props;
 
-  const [values, setvalues] = useState(init);
+  const [values, setValues] = useState(init);
   const [errors, setErrors] = useState(init);
   const [disabled, setDisabled] = useState(true);
 
@@ -40,7 +40,7 @@ export default function FormBuilder(props) {
   const change = (e) => {
     const { name, value } = e.target;
     JSON.stringify(errors) !== JSON.stringify(init) && validate(e);
-    setvalues({ ...values, [name]: value });
+    setValues({ ...values, [name]: value });
   };
 
 

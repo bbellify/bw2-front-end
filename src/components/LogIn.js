@@ -49,11 +49,11 @@ export default function Login() {
         Login
       </button>
       </form>
-      <Link className="NewUser" to="/NewUser">
+      <Link className="NewUser" to="/newuser">
         New User? 
       </Link>
 
-      <Link className="forgotpw" to ="/resetPassword">
+      <Link className="forgotpw" to ="/resetpassword">
           Forgot Password?
       </Link>
     </div>

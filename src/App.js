@@ -21,8 +21,8 @@ function App() {
           <Link to="/login">Log In </Link>
           <Link to="/logout">Log Out </Link>
           <Link to="/plants">My Plants </Link>
-          <Link to="/newUser">Create Account</Link>
-          <Link to="/editUser">My Account </Link>
+          <Link to="/newuser">Create Account</Link>
+          <Link to="/edituser">My Account </Link>
         </nav>
       </header>
       <Routes>
