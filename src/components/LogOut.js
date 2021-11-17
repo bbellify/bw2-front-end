@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from 'react-router-dom';
 
+import axiosWithAuth from "../utils/axiosWithAuth";
 
-//component will remove auth token and push user back to '/login'
+const Logout = () => {      
+    const {push} = useHistory();
 
-const LogOut = (props) => {
+    useEffect(()=> {
 
-    return(
-        <div>LogOut</div> 
-    )
-};
+        axiosWithAuth()
+            .post('/logout')
+            .then(resp => {
+                localStorage.removeItem('token');
+                push('/login');
+            });
+    }, []);  
+    return(<div></div>);
+}
 
-export default LogOut;
+export default Logout;

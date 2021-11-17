@@ -45,17 +45,17 @@ export default function Login() {
           validationSchema={loginFormSchema}
           getFormState={getFormState}
         />
-      <button  color="primary" type="submit" disabled={disabled}>
-        Login
-      </button>
+        <button  color="primary" type="submit" disabled={disabled}>
+          Login
+        </button>
       </form>
       <Link className="NewUser" to="/newuser">
         New User? 
       </Link>
 
-      <Link className="forgotpw" to ="/resetpassword">
+      {/* <Link className="forgotpw" to ="/resetpassword">
           Forgot Password?
-      </Link>
+      </Link> */}
     </div>
   );
 }

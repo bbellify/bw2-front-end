@@ -12,7 +12,7 @@ const axiosWithAuth = () => {
             authorization: token
         },
         // This URL will need to change presumably
-        baseURL: 'http://wateryourplants.heroku.whatever/api'
+        baseURL: 'https://buildweek-water-my-plants.herokuapp.com/api'
     })
 }
 
