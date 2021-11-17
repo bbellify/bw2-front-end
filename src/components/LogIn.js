@@ -4,57 +4,72 @@
 //push to /plants (PlantList.js)
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import loginFormSchema from "../utils/loginFormSchema";
-import FormBuilder from "../utils/FormBuilder";
 import "../LoginStyle.css";
 
+import axios from 'axios'
 
 
 export default function Login() {
 
-  const fields = [
-    { id: "username", type: "text", label: "Username" },
-    { id: "password", type: "text", label: "Password" },
-  ];
+  const initialValues = { username: '', password: ''}
 
-  let init = {};
-  fields.forEach((field) => (init[field.id] = ""));
+  const [formValues, setFormValues] = useState(initialValues); 
 
-  // eslint-disable-next-line
-  const [values, setValues] = useState(init);
-  const [disabled, setDisabled] = useState(true);
+  const navigate = useNavigate();
 
+  const handleChange = (e) => {
+    setFormValues({
+      ...formValues,
+      [e.target.name]: e.target.value
+    })
+  }
 
   const onSubmit = (e) => {
     e.preventDefault();
+    axios.post(`https://buildweek-water-my-plants.herokuapp.com/api/auth/login`, formValues)
+      .then(res => {
+        localStorage.setItem('token', res.data.token)
+        navigate('/plants')
+      })
+      .catch(err => {
+        console.log(formValues)
+        console.log({err})
+      })
   };
 
-  const getFormState = (state) => {
-    setValues(state.values);
-    setDisabled(state.disabled);
- }
 
   return (
     <div className="form-container">
       <h1>Welcome Back! </h1>
       <form onSubmit={onSubmit}>
-        <FormBuilder
-          fields={fields}
-          init={init}
-          validationSchema={loginFormSchema}
-          getFormState={getFormState}
-        />
-      <button  color="primary" type="submit" disabled={disabled}>
+        <label>Username
+          <input
+            type='text'
+            value={formValues.username}
+            name='username'
+            onChange={handleChange}
+            />
+            </label>
+          <label>Password
+            <input
+              // type='password'
+              value={formValues.password}
+              name='password'
+              onChange={handleChange}
+              />
+            </label>
+      <button  
+      color="primary" 
+      type="submit" 
+      // disabled={disabled}
+      >
         Login
       </button>
       </form>
       <Link className="NewUser" to="/newuser">
         New User? 
-      </Link>
-
-      <Link className="forgotpw" to ="/resetpassword">
-          Forgot Password?
       </Link>
     </div>
   );

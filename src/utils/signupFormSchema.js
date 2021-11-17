@@ -6,7 +6,7 @@ const signupFormSchema = Yup.object().shape({
   ,
   password: Yup.string()
     .required("Please enter password")
-    .min(8, "Password must be more than 8 characters"),
+    .min(6, "Password must be more than 6 characters"),
     phone: Yup.string()
     .required("Please enter a phone number")
     .min(9, "Please enter a valid phone number"),
