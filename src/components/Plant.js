@@ -22,7 +22,7 @@ const Plant = ({ plantInfo, updatePlantList, updatePlants }) => {
 	};
 
 	return (
-        <>
+        <Plant>
 			{isEditing ? (
 				<PlantEditForm
 					plantInfo={plantInfo}
@@ -48,7 +48,7 @@ const Plant = ({ plantInfo, updatePlantList, updatePlants }) => {
 					</div>
 				</>
 			)}
-        </>
+        </Plant>
 	);
 };
 
