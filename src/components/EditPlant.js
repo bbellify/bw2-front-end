@@ -3,18 +3,28 @@
 //cancel button, save button (save not done here)
 //on submit, PUT edited plant
 
-import React, { useState } from 'react';
-//import { axiosWithAuth } from ../;
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom'
+import axiosWithAuth from '../utils/axiosWithAuth';
 
-const EditPlantForm = ({ plantInfo, setIsEditing, updatePlants }) => {
+
+const EditPlantForm = () => {
+
+	const navigate = useNavigate()
+
+	const [plant, setPlant] = useState({})
+
 	const initialFormState = {
-        id: plantInfo.id,
-		nickname: plantInfo.nickname,
-		species: plantInfo.species,
-		h2oFrequency: plantInfo.h2oFrequency,
+        id: '',
+		nickname: '',
+		species: '',
+		h2oFrequency: ''
 	};
 
 	const [formState, setFormState] = useState(initialFormState);
+	
+	const { id } = useParams();
+	
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -24,12 +34,31 @@ const EditPlantForm = ({ plantInfo, setIsEditing, updatePlants }) => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 			//editing in future
+	}
 
 	const handleCancel = (e) => {
 		e.preventDefault();
-		setFormState(initialFormState);
-		setIsEditing(false);
+		navigate('/plants')
+		
 	};
+
+
+	useEffect(()=> {
+		axiosWithAuth()
+		.get('/users/plants')
+        .then(res => {
+			setFormState({
+				...formState,
+				id: res.data[id-1]['plant_id'],
+				nickname: res.data[id-1]['nickname'],
+				species: res.data[id-1]['species'],
+				h2oFrequency: res.data[id-1]['h2oFrequency']
+			})
+        })
+        .catch(err=> {
+            console.log({err})
+        })
+    }, [id])
 
 	return (
 		<>
@@ -55,7 +84,7 @@ const EditPlantForm = ({ plantInfo, setIsEditing, updatePlants }) => {
 					/>
 					<select
 						name='h2oFrequency'
-						value={plantInfo.h2oFrequency}
+						value={plant.h2oFrequency}
 						onChange={handleChange}
 					>
 						<option value=''>--Please select a watering option--</option>
@@ -73,7 +102,9 @@ const EditPlantForm = ({ plantInfo, setIsEditing, updatePlants }) => {
 					<button type='submit' value='submit' className='submit-button'>
 						Submit
 					</button>
-					<button className='cancel-button' value='cancel' onClick={handleCancel}>
+					<button className='cancel-button' value='cancel' 
+					onClick={handleCancel}
+					>
 						Cancel
 					</button>
 				</div>
@@ -81,5 +112,5 @@ const EditPlantForm = ({ plantInfo, setIsEditing, updatePlants }) => {
 		</>
 	);
 };
-}
+
 export default EditPlantForm;

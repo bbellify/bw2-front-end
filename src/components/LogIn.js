@@ -44,7 +44,6 @@ export default function Login() {
     <div className="form-container">
       <h1>Welcome Back! </h1>
       <form onSubmit={onSubmit}>
-
         <label>Username
           <input
             type='text'

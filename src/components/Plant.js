@@ -1,55 +1,20 @@
-import { useState } from 'react';
-import EditPlantForm from './EditPlant';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
+import React from "react";
+import { Link } from 'react-router-dom'
 
 //displays all the info for the given plant
 //edit button takes to EditPlant, delete button DELETEs plant from server
+const Plant = (props) => {
 
-const Plant = ({ plantInfo, updatePlantList, updatePlants }) => {
-	const [isEditing, setIsEditing] = useState(false);
-	const handleDelete = (id) => {
-		axiosWithAuth()
-			//.delete(`/api/`)
-			.then((res) => {
-				updatePlantList(id);
-			})
-			.catch((err) => {
-				console.log('err: ', err);
-			});
-	};
-	const handleEdit = () => {
-		setIsEditing(!isEditing);
-	};
-
-	return (
-        <Plant>
-			{isEditing ? (
-				<PlantEditForm
-					plantInfo={plantInfo}
-					setIsEditing={setIsEditing}
-					updatePlants={updatePlants}
-				/>
-			) : (
-				<>
-                    <h1>{plantInfo.id}</h1>
-					<h2>{plantInfo.nickname}</h2>
-					<h3>{plantInfo.species}</h3>
-					<p>Watering Frequency: {plantInfo.h2oFrequency}</p>
-					<div className='card-button-container'>
-						<button className='edit' onClick={() => handleEdit()}>
-							Edit
-						</button>
-						<button
-							className='delete'
-							onClick={() => handleDelete(plantInfo.plantid)}
-						>
-							Delete
-						</button>
-					</div>
-				</>
-			)}
-        </Plant>
-	);
+    const { plant } = props
+    
+    return(
+        <div>
+            <p>{plant.nickname}</p>
+            <p>{plant.species}</p>
+            <p>{plant.h2oFrequency}</p>
+            <img src={plant.image} width='20%' alt='plant'/>
+            <Link to={`/plants/${plant.plant_id}/edit`} >Edit</Link>
+        </div> 
+    )
 };
-
 export default Plant;

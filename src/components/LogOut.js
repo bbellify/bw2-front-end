@@ -1,21 +1,20 @@
 import React, { useEffect } from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router";
 
-import axiosWithAuth from "../utils/axiosWithAuth";
+//component will remove auth token and push user back to '/login'
 
-const Logout = () => {      
-    
+const LogOut = (props) => {
+
     const navigate = useNavigate();
-    useEffect(()=> {
 
-        axiosWithAuth()
-            .post('/logout')
-            .then(resp => {
-                localStorage.removeItem('token');
-                navigate('/login');
-            });
-    }, []);  
-    return(<div></div>);
-}
+    useEffect(()=>{
+        localStorage.removeItem('token');
+        navigate('/')
+    }, [])
 
-export default Logout;
+    return(
+        <div>LogOut</div> 
+    )
+};
+
+export default LogOut;
