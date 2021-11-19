@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 
 //component will remove auth token and push user back to '/login'
