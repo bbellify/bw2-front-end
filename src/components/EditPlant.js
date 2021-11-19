@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 
 //form inputs filled with plant's info
 //cancel button, save button (save not done here)
@@ -12,7 +13,7 @@ const EditPlantForm = () => {
 
 	const navigate = useNavigate()
 
-	const [plant, setPlant] = useState({})
+	
 
 	const initialFormState = {
         id: '',
@@ -84,7 +85,7 @@ const EditPlantForm = () => {
 					/>
 					<select
 						name='h2oFrequency'
-						value={plant.h2oFrequency}
+						value={formState.h2oFrequency}
 						onChange={handleChange}
 					>
 						<option value=''>--Please select a watering option--</option>

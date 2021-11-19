@@ -5,7 +5,6 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import loginFormSchema from "../utils/loginFormSchema";
 import "../LoginStyle.css";
 
 import axios from 'axios'
