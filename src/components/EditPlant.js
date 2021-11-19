@@ -49,16 +49,16 @@ const EditPlantForm = () => {
         .then(res => {
 			setFormState({
 				...formState,
-				id: res.data[id]['plant_id'],
-				nickname: res.data[id]['nickname'],
-				species: res.data[id]['species'],
-				h2oFrequency: res.data[id]['h2oFrequency']
+				id: res.data[id-1]['plant_id'],
+				nickname: res.data[id-1]['nickname'],
+				species: res.data[id-1]['species'],
+				h2oFrequency: res.data[id-1]['h2oFrequency']
 			})
         })
         .catch(err=> {
             console.log({err})
         })
-    }, [])
+    }, [id])
 
 	return (
 		<>
