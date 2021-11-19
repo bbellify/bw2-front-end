@@ -8,6 +8,7 @@ const axiosWithAuth = () => {
         headers: {
             authorization: token
         },
+
         baseURL: 'https://buildweek-water-my-plants.herokuapp.com/api'
     })
 }

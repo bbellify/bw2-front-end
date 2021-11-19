@@ -22,7 +22,7 @@ export default function NewUser() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    // post login code here
+    console.log(e)
   };
 
   const getFormState = (state) => {

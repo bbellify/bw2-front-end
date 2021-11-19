@@ -1,9 +1,14 @@
+
 import React from "react";
 import { Link } from 'react-router-dom'
 
+import { useState } from 'react';
+import EditPlantForm from './EditPlant';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
+
+
 //displays all the info for the given plant
 //edit button takes to EditPlant, delete button DELETEs plant from server
-const Plant = (props) => {
 
     const { plant } = props
     
@@ -16,5 +21,7 @@ const Plant = (props) => {
             <Link to={`/plants/${plant.plant_id}/edit`} >Edit</Link>
         </div> 
     )
+
 };
+
 export default Plant;
