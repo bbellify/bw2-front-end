@@ -1,8 +1,8 @@
-import React from "react";
-import { useState, useEffect } from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import Plant from './Plant';
+import React, { useEffect, useState } from "react";
+import axiosWithAuth from '../utils/axiosWithAuth'
+import Plant from '../components/Plant'
 import { Link } from 'react-router-dom';
+
 
 //displays all plants in the user's account
 //also has an "add plant" button that opens AddPlant
@@ -19,48 +19,26 @@ const PlantList = () => {
 			});
 	}, []);
 
-	const updatePlantList = (id) => {
-		const newPlantList = plantList.filter((plant) => plant.plantid !== id);
-		setPlantList(newPlantList);
-	};
+    const [plants, setPlants] = useState([])
 
-	const updatePlants = (newPlant) => {
-		const newPlantList = plantList.map((plant) => {
-			if (plant.plantid === newPlant.plantid) {
-				return newPlant;
-			}
-			return plant;
-		});
-		setPlantList(newPlantList);
-	};
+    useEffect(()=>{
+        axiosWithAuth()
+        .get('/users/plants')
+        .then(res => {
+            // console.log(res);
+            setPlants(res.data);
+            // console.log(plants);
+        })
+        .catch(err=> {
+            console.log({err})
+        })
+    }, [])
 
-	const renderPlantList = () => {
-		return plantList.map((plant) => (
-			<Plant
-				key={plant.plantid}
-				plantInfo={plant}
-				updatePlantList={updatePlantList}
-				updatePlants={updatePlants}
-			/>
-		));
-	};
-
-	const renderAddPlants = () => {
-		return (
-			<div>
-				<h1>Let's add some plants!</h1>
-				<Link to='/Plant'>
-					<button>Add Plants</button>
-				</Link>
-			</div>
-		);
-	};
-
-	return (
-		<li>
-			{plantList.length === 0 ? renderAddPlants() : renderPlantList()}
-		</li>
-	);
+    return(
+        <div>
+            {plants && plants.map(plant => (<Plant key={plant.id} plant={plant} />))}
+        </div>
+    )
 };
 
 export default PlantList;

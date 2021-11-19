@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
+import { Link, Route, Routes, Navigate } from 'react-router-dom';
 
 import Plant from './components/Plant'
 import EditPlant from './components/EditPlant';
@@ -26,17 +26,41 @@ function App() {
         </nav>
       </header>
       <Routes>
+
+        <Route exact path={'/login'} element={<LogIn />}/>
+        <Route exact path={'/logout'} element={<LogOut />}/>
+        <Route exact path={'/newuser'} element={<NewUser/>}/>      
+        
+        <Route exact path={'/plants'} 
+          element={
+            <RequireAuth redirectTo='/login'>
+              <PlantList/>
+            </RequireAuth>
+          }
+        /> 
+
+
+        <Route exact path={'/edituser'} 
+          element={
+            <RequireAuth redirectTo='/login'>
+              <EditUser/>
+            </RequireAuth>
+        }/>
+
+        {/* not sure how to deal with these private paths derivative of /plants yet */}
         <Route exact path={'/plants/:id'} element={<Plant/>}/>
         <Route exact path={'/plants/:id/edit'} element={<EditPlant/>}/>
         <Route exact path={'/plants/new'} element={<NewPlant/>}/>
-        <Route exact path={'/plants'} element={<PlantList/>}/>
-        <Route exact path={'/login'} element={<LogIn />}/>
-        <Route exact path={'/logout'} element={<LogOut />}/>
-        <Route exact path={'/newuser'} element={<NewUser/>}/>
-        <Route exact path={'/edituser'} element={<EditUser/>}/>
+
+        
       </Routes>
     </div>
   );
+}
+
+function RequireAuth({ children, redirectTo }) {
+  let isAuthenticated = localStorage.getItem('token');
+  return isAuthenticated ? children : <Navigate to={redirectTo} />
 }
 
 export default App;
